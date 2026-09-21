@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="UsandoHttpClient.API/UsandoHttpClient.API.csproj" />
+  <Project Path="UsandoHttpClient.Consola/UsandoHttpClient.Consola.csproj" />
+  <Project Path="UsandoHttpClient.Shared/UsandoHttpClient.Shared.csproj" />
+</Solution>
