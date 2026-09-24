@@ -27,5 +27,14 @@ namespace UsandoHttpClient.Shared.Controllers
 
             return resp;
         }
+
+        [HttpPost]
+        public ActionResult<int> Post(WeatherForecast DTO)
+        {
+            //Console.WriteLine($"Ejecución del Post<{DTO.Summary}>");
+            //return 1;
+            Console.WriteLine($"Ejecución del Post con error<{DTO.Summary}>");
+            return BadRequest();
+        }
     }
 }
