@@ -4,4 +4,7 @@
 //await Get.Ejecutar();
 
 //metodos POST del HttpClient
-await Post.Ejecutar();
+//await Post.Ejecutar();
+
+//metodos POST del HttpClient para subir archivos
+await SubirArchivo.Ejecutar();
