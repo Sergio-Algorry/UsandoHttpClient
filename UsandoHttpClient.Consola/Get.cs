@@ -14,7 +14,7 @@ namespace UsandoHttpClient.Consola
             var http = new HttpClient();
 
             //realizar un Get Asincrono GetAsync
-            var resp = await http.GetAsync("https://localhost:7056/WeatherForecast");
+            var resp = await http.GetAsync("https://localhost:7066/WeatherForecast");
 
             //El CUERPO de la respuesta
             Console.WriteLine(" CUERPO DE LA RESPUESTA: ");
@@ -23,7 +23,7 @@ namespace UsandoHttpClient.Consola
             Console.WriteLine("\n");
 
             // La CABECERA de la respuesta
-            Console.WriteLine(" CUERPO DE LA RESPUESTA: ");
+            Console.WriteLine(" CABECERA DE LA RESPUESTA: ");
             foreach (var header in resp.Headers)
             {
                 Console.WriteLine($"Clave: {header.Key} Valor: {string.Join(", ", header.Value)}");

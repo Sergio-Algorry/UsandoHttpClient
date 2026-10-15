@@ -46,26 +46,33 @@ namespace UsandoHttpClient.Shared.Controllers
         [HttpPost("subirarchivo")]
         public async Task<ActionResult> SubirArchivo([FromForm] IFormFile archivo)
         {
-            string nombreArchivo = $"{Guid.NewGuid()}{Path.GetExtension(archivo.FileName)}";
-            string rutaCarpetaDocumentos = Path.Combine(env.WebRootPath, "Documentos");
-
-            if (!Directory.Exists(rutaCarpetaDocumentos))
+            try
             {
-                Directory.CreateDirectory(rutaCarpetaDocumentos);
+                string nombreArchivo = $"{Guid.NewGuid()}{Path.GetExtension(archivo.FileName)}";
+                string rutaCarpetaDocumentos = Path.Combine(env.WebRootPath, "Documentos");
+
+                if (!Directory.Exists(rutaCarpetaDocumentos))
+                {
+                    Directory.CreateDirectory(rutaCarpetaDocumentos);
+                }
+
+                string rutaArchivo = Path.Combine(rutaCarpetaDocumentos, nombreArchivo);
+
+                using (var fs = System.IO.File.Create(rutaArchivo))
+                {
+                    await archivo.OpenReadStream().CopyToAsync(fs);
+                }
+
+                //var fs = System.IO.File.Create(rutaArchivo);
+                //await archivo.OpenReadStream().CopyToAsync(fs);
+                //fs.DisposeAsync();
+
+                return Ok();
             }
-
-            string rutaArchivo = Path.Combine(rutaCarpetaDocumentos, nombreArchivo);
-
-            using (var fs = System.IO.File.Create(rutaArchivo))
+            catch (Exception e)
             {
-                await archivo.OpenReadStream().CopyToAsync(fs);
+                return BadRequest(e.Message);
             }
-
-            //var fs = System.IO.File.Create(rutaArchivo);
-            //await archivo.OpenReadStream().CopyToAsync(fs);
-            //fs.DisposeAsync();
-
-            return Ok();
         }
     }
 }
